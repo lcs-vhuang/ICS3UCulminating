@@ -17,6 +17,8 @@
 		A6FB01402FCDE63200434A8C /* SudokuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB013F2FCDE63200434A8C /* SudokuCell.swift */; };
 		A6FB01422FCDE63200434A8C /* SudokuBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01412FCDE63200434A8C /* SudokuBoard.swift */; };
 		A6FB01442FCE120C00434A8C /* SudokuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01432FCE120C00434A8C /* SudokuViewModel.swift */; };
+		A6FB01462FCE158900434A8C /* SudokuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01452FCE158900434A8C /* SudokuCellView.swift */; };
+		A6FB01482FCE158900434A8C /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01472FCE158900434A8C /* SudokuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		A6FB013F2FCDE63200434A8C /* SudokuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuCell.swift; sourceTree = "<group>"; };
 		A6FB01412FCDE63200434A8C /* SudokuBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBoard.swift; sourceTree = "<group>"; };
 		A6FB01432FCE120C00434A8C /* SudokuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuViewModel.swift; sourceTree = "<group>"; };
+		A6FB01452FCE158900434A8C /* SudokuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuCellView.swift; sourceTree = "<group>"; };
+		A6FB01472FCE158900434A8C /* SudokuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 			children = (
 				A6FB01362FCDDC5400434A8C /* HousesListView.swift */,
 				A6FB01382FCDDC5400434A8C /* HouseItemView.swift */,
+				A6FB01452FCE158900434A8C /* SudokuCellView.swift */,
+				A6FB01472FCE158900434A8C /* SudokuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,12 +181,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FB01392FCDDC5400434A8C /* HouseItemView.swift in Sources */,
+				A6FB01482FCE158900434A8C /* SudokuView.swift in Sources */,
 				A6FB01312FCDDC5400434A8C /* House.swift in Sources */,
 				A6FB01372FCDDC5400434A8C /* HousesListView.swift in Sources */,
 				A6FB01422FCDE63200434A8C /* SudokuBoard.swift in Sources */,
 				A6FB01342FCDDC5400434A8C /* HouseListViewModel.swift in Sources */,
 				A6FB01402FCDE63200434A8C /* SudokuCell.swift in Sources */,
 				A6FB012C2FCDDC5400434A8C /* ICS3UCulminatingApp.swift in Sources */,
+				A6FB01462FCE158900434A8C /* SudokuCellView.swift in Sources */,
 				A6FB01442FCE120C00434A8C /* SudokuViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
