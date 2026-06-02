@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		A6FB012C2FCDDC5400434A8C /* ICS3UCulminatingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB012B2FCDDC5400434A8C /* ICS3UCulminatingApp.swift */; };
 		A6FB012E2FCDDC5400434A8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6FB012D2FCDDC5400434A8C /* Assets.xcassets */; };
-		A6FB01312FCDDC5400434A8C /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01302FCDDC5400434A8C /* House.swift */; };
-		A6FB01342FCDDC5400434A8C /* HouseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01332FCDDC5400434A8C /* HouseListViewModel.swift */; };
-		A6FB01372FCDDC5400434A8C /* HousesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01362FCDDC5400434A8C /* HousesListView.swift */; };
-		A6FB01392FCDDC5400434A8C /* HouseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01382FCDDC5400434A8C /* HouseItemView.swift */; };
 		A6FB013B2FCDDC5400434A8C /* RELEASE.md in Resources */ = {isa = PBXBuildFile; fileRef = A6FB013A2FCDDC5400434A8C /* RELEASE.md */; };
 		A6FB01402FCDE63200434A8C /* SudokuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB013F2FCDE63200434A8C /* SudokuCell.swift */; };
 		A6FB01422FCDE63200434A8C /* SudokuBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB01412FCDE63200434A8C /* SudokuBoard.swift */; };
@@ -25,10 +21,6 @@
 		A6FB01282FCDDC5400434A8C /* ICS3UCulminating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICS3UCulminating.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6FB012B2FCDDC5400434A8C /* ICS3UCulminatingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICS3UCulminatingApp.swift; sourceTree = "<group>"; };
 		A6FB012D2FCDDC5400434A8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A6FB01302FCDDC5400434A8C /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
-		A6FB01332FCDDC5400434A8C /* HouseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseListViewModel.swift; sourceTree = "<group>"; };
-		A6FB01362FCDDC5400434A8C /* HousesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousesListView.swift; sourceTree = "<group>"; };
-		A6FB01382FCDDC5400434A8C /* HouseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseItemView.swift; sourceTree = "<group>"; };
 		A6FB013A2FCDDC5400434A8C /* RELEASE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = RELEASE.md; sourceTree = "<group>"; };
 		A6FB013F2FCDE63200434A8C /* SudokuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuCell.swift; sourceTree = "<group>"; };
 		A6FB01412FCDE63200434A8C /* SudokuBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBoard.swift; sourceTree = "<group>"; };
@@ -80,7 +72,6 @@
 		A6FB012F2FCDDC5400434A8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A6FB01302FCDDC5400434A8C /* House.swift */,
 				A6FB013F2FCDE63200434A8C /* SudokuCell.swift */,
 				A6FB01412FCDE63200434A8C /* SudokuBoard.swift */,
 			);
@@ -90,7 +81,6 @@
 		A6FB01322FCDDC5400434A8C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A6FB01332FCDDC5400434A8C /* HouseListViewModel.swift */,
 				A6FB01432FCE120C00434A8C /* SudokuViewModel.swift */,
 			);
 			path = ViewModels;
@@ -99,8 +89,6 @@
 		A6FB01352FCDDC5400434A8C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A6FB01362FCDDC5400434A8C /* HousesListView.swift */,
-				A6FB01382FCDDC5400434A8C /* HouseItemView.swift */,
 				A6FB01452FCE158900434A8C /* SudokuCellView.swift */,
 				A6FB01472FCE158900434A8C /* SudokuView.swift */,
 			);
@@ -180,12 +168,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6FB01392FCDDC5400434A8C /* HouseItemView.swift in Sources */,
 				A6FB01482FCE158900434A8C /* SudokuView.swift in Sources */,
-				A6FB01312FCDDC5400434A8C /* House.swift in Sources */,
-				A6FB01372FCDDC5400434A8C /* HousesListView.swift in Sources */,
 				A6FB01422FCDE63200434A8C /* SudokuBoard.swift in Sources */,
-				A6FB01342FCDDC5400434A8C /* HouseListViewModel.swift in Sources */,
 				A6FB01402FCDE63200434A8C /* SudokuCell.swift in Sources */,
 				A6FB012C2FCDDC5400434A8C /* ICS3UCulminatingApp.swift in Sources */,
 				A6FB01462FCE158900434A8C /* SudokuCellView.swift in Sources */,
