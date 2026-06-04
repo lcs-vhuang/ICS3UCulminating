@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6232C552FD1AE6700269B18 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6232C542FD1AE6700269B18 /* GameManager.swift */; };
+		A6232C572FD1AE6C00269B18 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6232C562FD1AE6C00269B18 /* HomeView.swift */; };
 		A6FB012C2FCDDC5400434A8C /* ICS3UCulminatingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FB012B2FCDDC5400434A8C /* ICS3UCulminatingApp.swift */; };
 		A6FB012E2FCDDC5400434A8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6FB012D2FCDDC5400434A8C /* Assets.xcassets */; };
 		A6FB013B2FCDDC5400434A8C /* RELEASE.md in Resources */ = {isa = PBXBuildFile; fileRef = A6FB013A2FCDDC5400434A8C /* RELEASE.md */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A6232C542FD1AE6700269B18 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		A6232C562FD1AE6C00269B18 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A6FB01282FCDDC5400434A8C /* ICS3UCulminating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICS3UCulminating.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6FB012B2FCDDC5400434A8C /* ICS3UCulminatingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICS3UCulminatingApp.swift; sourceTree = "<group>"; };
 		A6FB012D2FCDDC5400434A8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 			children = (
 				A6FB013F2FCDE63200434A8C /* SudokuCell.swift */,
 				A6FB01412FCDE63200434A8C /* SudokuBoard.swift */,
+				A6232C542FD1AE6700269B18 /* GameManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			children = (
 				A6FB01452FCE158900434A8C /* SudokuCellView.swift */,
 				A6FB01472FCE158900434A8C /* SudokuView.swift */,
+				A6232C562FD1AE6C00269B18 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,7 +177,9 @@
 				A6FB01482FCE158900434A8C /* SudokuView.swift in Sources */,
 				A6FB01422FCDE63200434A8C /* SudokuBoard.swift in Sources */,
 				A6FB01402FCDE63200434A8C /* SudokuCell.swift in Sources */,
+				A6232C552FD1AE6700269B18 /* GameManager.swift in Sources */,
 				A6FB012C2FCDDC5400434A8C /* ICS3UCulminatingApp.swift in Sources */,
+				A6232C572FD1AE6C00269B18 /* HomeView.swift in Sources */,
 				A6FB01462FCE158900434A8C /* SudokuCellView.swift in Sources */,
 				A6FB01442FCE120C00434A8C /* SudokuViewModel.swift in Sources */,
 			);

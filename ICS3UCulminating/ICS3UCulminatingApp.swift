@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ICS3UCulminatingApp: App {
+    @State private var gameManager = GameManager()
+    
     var body: some Scene {
         WindowGroup {
-            SudokuView()
+            HomeView()
+                .environment(gameManager)
         }
     }
 }

@@ -20,6 +20,7 @@ class SudokuViewModel {
     // private(set) means other parts of the app can see the board, but only this ViewModel can replace it.
     private(set) var board: SudokuBoard
     
+    let difficulty: SudokuDifficulty
     // Keeps track of which cell is currently selected by the user.
     // Holds a tuple containing (row, column). If nil, no cell is selected.
     var selectedCell: (row: Int, column: Int)?
@@ -35,8 +36,16 @@ class SudokuViewModel {
     
     // Initializes the ViewModel with a specific puzzle.
     // Defaults to the example puzzle provided in the SudokuBoard class.
-    init(puzzle: [[Int?]] = SudokuBoard.examplePuzzle) {
-        self.board = SudokuBoard(initialValues: puzzle)
+    init(difficulty: SudokuDifficulty = .beginner) {
+
+        self.difficulty = difficulty
+        
+        let data = difficulty.data
+
+        self.board = SudokuBoard(
+            initialValues: data.puzzle,
+            solution: data.solution
+        )
     }
     
     // MARK: Functions
@@ -71,9 +80,14 @@ class SudokuViewModel {
     
     // Resets the board back to its original starting state.
     func resetGame() {
-        // We can just create a new board using the current puzzle's initial state logic.
-        // For simplicity here, we'll re-initialize with the default example.
-        self.board = SudokuBoard(initialValues: SudokuBoard.examplePuzzle)
+
+        let data = difficulty.data
+
+        self.board = SudokuBoard(
+            initialValues: data.puzzle,
+            solution: data.solution
+        )
+
         self.selectedCell = nil
     }
 }

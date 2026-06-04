@@ -9,126 +9,146 @@ import Foundation
 import Observation
 
 // MODEL
-// SudokuBoard manages the state and rules of a 9x9 Sudoku game.
-// The @Observable macro allows SwiftUI views to automatically update when properties change.
 @Observable
 class SudokuBoard {
     
     // MARK: Stored properties
-    
-    // A 2D array (array of arrays) that holds 81 SudokuCell objects.
-    // The outer array represents rows, and the inner arrays represent columns.
     var grid: [[SudokuCell]]
+    let solution: [[Int]]
     
     // MARK: Initializers
-    
-    // This initializer sets up the 9x9 grid.
-    // It can take an optional 2D array of integers to populate the board with a specific puzzle.
-    init(initialValues: [[Int?]]? = nil) {
+    init(initialValues: [[Int?]], solution: [[Int]]) {
         var newGrid: [[SudokuCell]] = []
-        
-        // Loop through 9 rows
         for row in 0..<9 {
             var currentRow: [SudokuCell] = []
-            // Loop through 9 columns for each row
             for column in 0..<9 {
-                // Get the value from the initial data if it exists
-                let value = initialValues?[row][column]
-                
-                // Create a new cell. If 'value' is not nil, it's a "given" (pre-filled) cell.
+                let value = initialValues[row][column]
                 currentRow.append(SudokuCell(value: value, isGiven: value != nil))
             }
-            // Add the completed row to our grid
             newGrid.append(currentRow)
         }
-        
         self.grid = newGrid
+        self.solution = solution
     }
     
     // MARK: Functions
-    
-    // Update the value of a specific cell based on its row and column index.
     func setCellValue(row: Int, column: Int, value: Int?) {
-        // Safety check: ensure the coordinates are within the 0-8 range.
         guard row >= 0 && row < 9 && column >= 0 && column < 9 else { return }
-        
-        // Logical check: only allow updating the cell if it wasn't pre-filled by the puzzle.
         if !grid[row][column].isGiven {
             grid[row][column].value = value
         }
     }
     
-    // This function checks if placing a specific number at a position follows Sudoku rules.
-    func isValid(row: Int, column: Int, value: Int) -> Bool {
-        // 1. Check the Row: iterate through all columns in this specific row.
-        for i in 0..<9 {
-            // If we find the same value in another cell in the same row, it's invalid.
-            if i != column && grid[row][i].value == value {
-                return false
-            }
-        }
-        
-        // 2. Check the Column: iterate through all rows in this specific column.
-        for i in 0..<9 {
-            // If we find the same value in another cell in the same column, it's invalid.
-            if i != row && grid[i][column].value == value {
-                return false
-            }
-        }
-        
-        // 3. Check the 3x3 Box: 
-        // First, find the starting index of the 3x3 box this cell belongs to.
-        // For example, if row is 4, (4/3)*3 = 1*3 = 3. The box starts at row 3.
-        let boxRowStart = (row / 3) * 3
-        let boxColumnStart = (column / 3) * 3
-        
-        // Loop through the 3 rows and 3 columns of the subgrid box.
-        for i in boxRowStart..<boxRowStart + 3 {
-            for j in boxColumnStart..<boxColumnStart + 3 {
-                // If we find the same value in another cell in the same box, it's invalid.
-                if (i != row || j != column) && grid[i][j].value == value {
-                    return false
-                }
-            }
-        }
-        
-        // If we passed all three checks, the placement is valid!
-        return true
+    func isCorrect(row: Int, column: Int) -> Bool {
+        guard let value = grid[row][column].value else { return false }
+        return value == solution[row][column]
     }
     
-    // Checks the entire board to see if all cells are filled and follow Sudoku rules.
     func isSolved() -> Bool {
         for row in 0..<9 {
             for column in 0..<9 {
-                // If any cell is empty, the puzzle isn't solved.
-                guard let value = grid[row][column].value else {
-                    return false
-                }
-                
-                // If any filled cell violates a rule, the puzzle isn't solved correctly.
-                if !isValid(row: row, column: column, value: value) {
+                if !isCorrect(row: row, column: column) {
                     return false
                 }
             }
         }
-        // If we checked all 81 cells and found no issues, the player wins!
         return true
     }
 }
 
-// MARK: Example Data
+// MARK: - Difficulty Levels
+enum SudokuDifficulty: String, CaseIterable {
+    case beginner = "Easy"
+    case intermediate = "Medium"
+    case advanced = "Hard"
+    
+    var data: (puzzle: [[Int?]], solution: [[Int]]) {
+        switch self {
+        case .beginner:
+            return (SudokuBoard.easyPuzzle, SudokuBoard.easySolution)
+        case .intermediate:
+            return (SudokuBoard.mediumPuzzle, SudokuBoard.mediumSolution)
+        case .advanced:
+            return (SudokuBoard.hardPuzzle, SudokuBoard.hardSolution)
+        }
+    }
+}
+
+// MARK: - Puzzle Data
 extension SudokuBoard {
-    // A standard Sudoku puzzle used for testing or demonstration.
-    // 'nil' represents an empty square the player must fill.
-    static let examplePuzzle: [[Int?]] = [
-        [5, 3, nil, nil, 7, nil, nil, nil, nil],
-        [6, nil, nil, 1, 9, 5, nil, nil, nil],
-        [nil, 9, 8, nil, nil, nil, nil, 6, nil],
-        [8, nil, nil, nil, 6, nil, nil, nil, 3],
-        [4, nil, nil, 8, nil, 3, nil, nil, 1],
-        [7, nil, nil, nil, 2, nil, nil, nil, 6],
-        [nil, 6, nil, nil, nil, nil, 2, 8, nil],
-        [nil, nil, nil, 4, 1, 9, nil, nil, 5],
-        [nil, nil, nil, nil, 8, nil, nil, 7, 9]
+    
+    // EASY
+    static let easyPuzzle: [[Int?]] = [
+        [nil, nil, nil, 2, 6, nil, 7, nil, 1],
+        [6, 8, nil, nil, 7, nil, nil, 9, nil],
+        [1, 9, nil, nil, nil, 4, 5, nil, nil],
+        [8, 2, nil, 1, nil, nil, nil, 4, nil],
+        [nil, nil, 4, 6, nil, 2, 9, nil, nil],
+        [nil, 5, nil, nil, nil, 3, nil, 2, 8],
+        [nil, nil, 9, 3, nil, nil, nil, 7, 4],
+        [nil, 4, nil, nil, 5, nil, nil, 3, 6],
+        [7, nil, 3, nil, 1, 8, nil, nil, nil]
+    ]
+
+    static let easySolution: [[Int]] = [
+        [4, 3, 5, 2, 6, 9, 7, 8, 1],
+        [6, 8, 2, 5, 7, 1, 4, 9, 3],
+        [1, 9, 7, 8, 3, 4, 5, 6, 2],
+        [8, 2, 6, 1, 9, 5, 3, 4, 7],
+        [3, 7, 4, 6, 8, 2, 9, 1, 5],
+        [9, 5, 1, 7, 4, 3, 6, 2, 8],
+        [5, 1, 9, 3, 2, 6, 8, 7, 4],
+        [2, 4, 8, 9, 5, 7, 1, 3, 6],
+        [7, 6, 3, 4, 1, 8, 2, 5, 9]
+    ]
+    
+    // MEDIUM
+    static let mediumPuzzle: [[Int?]] = [
+        [nil, 2, nil, 6, nil, 8, nil, nil, nil],
+        [5, 8, nil, nil, nil, 9, 7, nil, nil],
+        [nil, nil, nil, nil, 4, nil, nil, nil, nil],
+        [3, 7, nil, nil, nil, nil, 5, nil, nil],
+        [6, nil, nil, nil, nil, nil, nil, nil, 4],
+        [nil, nil, 8, nil, nil, nil, nil, 1, 3],
+        [nil, nil, nil, nil, 2, nil, nil, nil, nil],
+        [nil, nil, 9, 8, nil, nil, nil, 3, 6],
+        [nil, nil, nil, 3, nil, 6, nil, 9, nil]
+    ]
+
+    static let mediumSolution: [[Int]] = [
+        [1, 2, 3, 6, 7, 8, 9, 4, 5],
+        [5, 8, 4, 2, 3, 9, 7, 6, 1],
+        [9, 6, 7, 1, 4, 5, 3, 2, 8],
+        [3, 7, 2, 4, 6, 1, 5, 8, 9],
+        [6, 9, 1, 5, 8, 3, 2, 7, 4],
+        [4, 5, 8, 7, 9, 2, 6, 1, 3],
+        [8, 3, 6, 9, 2, 4, 1, 5, 7],
+        [2, 1, 9, 8, 5, 7, 4, 3, 6],
+        [7, 4, 5, 3, 1, 6, 8, 9, 2]
+    ]
+    
+    // HARD
+    static let hardPuzzle: [[Int?]] = [
+        [8, nil, nil, nil, nil, nil, nil, nil, nil],
+        [nil, nil, 3, 6, nil, nil, nil, nil, nil],
+        [nil, 7, nil, nil, 9, nil, 2, nil, nil],
+        [nil, 5, nil, nil, nil, 7, nil, nil, nil],
+        [nil, nil, nil, nil, 4, 5, 7, nil, nil],
+        [nil, nil, nil, 1, nil, nil, nil, 3, nil],
+        [nil, nil, 1, nil, nil, nil, nil, 6, 8],
+        [nil, nil, 8, 5, nil, nil, nil, 1, nil],
+        [nil, 9, nil, nil, nil, nil, 4, nil, nil]
+    ]
+
+    static let hardSolution: [[Int]] = [
+        [8, 1, 2, 7, 5, 3, 6, 4, 9],
+        [9, 4, 3, 6, 8, 2, 1, 7, 5],
+        [6, 7, 5, 4, 9, 1, 2, 8, 3],
+        [1, 5, 4, 2, 3, 7, 8, 9, 6],
+        [3, 6, 9, 8, 4, 5, 7, 2, 1],
+        [2, 8, 7, 1, 6, 9, 5, 3, 4],
+        [5, 2, 1, 9, 7, 4, 3, 6, 8],
+        [4, 3, 8, 5, 2, 6, 9, 1, 7],
+        [7, 9, 6, 3, 1, 8, 4, 5, 2]
     ]
 }
