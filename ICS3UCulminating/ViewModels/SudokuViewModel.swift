@@ -25,6 +25,9 @@ class SudokuViewModel {
     // Holds a tuple containing (row, column). If nil, no cell is selected.
     var selectedCell: (row: Int, column: Int)?
     
+    // Track if the player has tried to submit their result
+    var hasSubmitted: Bool = false
+    
     // MARK: Computed properties
     
     // Tells the UI whether the puzzle has been successfully completed.
@@ -89,5 +92,18 @@ class SudokuViewModel {
         )
 
         self.selectedCell = nil
+        self.hasSubmitted = false
+    }
+    
+    // Check if the current board is valid and update submission state
+    func submitResult() {
+        hasSubmitted = true
+        
+        // If the game is not won, hide the red highlights after 1 second
+        if !gameIsWon {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.hasSubmitted = false
+            }
+        }
     }
 }

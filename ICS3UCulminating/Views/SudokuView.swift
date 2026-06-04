@@ -19,6 +19,9 @@ struct SudokuView: View {
     // Used to navigate back to the home screen
     @Environment(\.dismiss) var dismiss
     
+    // State to show the success view
+    @State private var showingSuccess = false
+    
     // MARK: Computed properties
     
     var body: some View {
@@ -49,8 +52,11 @@ struct SudokuView: View {
                                             let isSelected = viewModel.selectedCell?.row == rowIndex && 
                                                            viewModel.selectedCell?.column == columnIndex
                                             
+                                            // Check if cell is incorrect (only show if submitted)
+                                            let isIncorrect = viewModel.hasSubmitted && !viewModel.board.isCorrect(row: rowIndex, column: columnIndex)
+                                            
                                             // Create our custom cell view
-                                            SudokuCellView(cell: cell, isSelected: isSelected)
+                                            SudokuCellView(cell: cell, isSelected: isSelected, isIncorrect: isIncorrect)
                                                 .onTapGesture {
                                                     // Tell the ViewModel to select this cell when tapped
                                                     viewModel.selectCell(row: rowIndex, column: columnIndex)
@@ -107,19 +113,34 @@ struct SudokuView: View {
                     .buttonStyle(.bordered)
                 }
                 .padding(.horizontal, 80)
+                
+                // I'm Done Button
+                Button {
+                    viewModel.submitResult()
+                    if viewModel.gameIsWon {
+                        showingSuccess = true
+                    }
+                } label: {
+                    Text("I'm done!")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+                .padding(.horizontal, 80)
             }
             
             Spacer()
         }
         .navigationTitle("\(viewModel.difficulty.rawValue) Level")
         .navigationBarTitleDisplayMode(.inline)
-        // Show an alert when the player wins
-        .alert("Congratulations!", isPresented: .constant(viewModel.gameIsWon)) {
-            Button("New Game") {
-                viewModel.resetGame()
-            }
-        } message: {
-            Text("You've successfully solved the puzzle!")
+        // Show success screen when the player wins and submits
+        .fullScreenCover(isPresented: $showingSuccess) {
+            SuccessView(difficulty: viewModel.difficulty.rawValue)
+                .onDisappear {
+                    // When the success view is dismissed, we go back to home
+                    dismiss()
+                }
         }
     }
 }
