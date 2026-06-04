@@ -24,11 +24,6 @@ struct SudokuView: View {
     var body: some View {
         VStack(spacing: 20) {
             
-            // Level Title
-            Text("\(viewModel.difficulty.rawValue) Level")
-                .font(.headline)
-                .foregroundColor(.secondary)
-            
             // 1. The Sudoku Grid
             // To show the 3x3 boxes clearly, we use a "Grid of Grids" approach.
             // The outer Grid handles the nine 3x3 boxes.
@@ -111,15 +106,6 @@ struct SudokuView: View {
                     }
                     .buttonStyle(.bordered)
                 }
-                
-                // Home Button
-                Button {
-                    dismiss()
-                } label: {
-                    Label("Home", systemImage: "house")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
                 .padding(.horizontal, 80)
             }
             
