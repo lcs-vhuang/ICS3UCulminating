@@ -12,6 +12,7 @@ struct SuccessView: View {
     // MARK: - Stored properties
     
     let difficulty: String
+    let timeUsed: String
     
     // Used to go back to the home screen
     @Environment(\.dismiss) var dismiss
@@ -34,10 +35,13 @@ struct SuccessView: View {
                         .font(.largeTitle)
                         .fontWeight(.black)
                     
-                    Text("You have finished \(difficulty) Level!")
+                    Text("You have finished \(difficulty) Level!" )
                         .font(.title2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.secondary)
+                    Text("Time \(timeUsed)")
+                        .fontWeight(.medium)
+                        .foregroundStyle(.blue)
                 }
                 
                 Text("Tap anywhere to return home")
@@ -55,5 +59,5 @@ struct SuccessView: View {
 }
 
 #Preview {
-    SuccessView(difficulty: "Easy")
+    SuccessView(difficulty: "Easy", timeUsed: "02:45")
 }

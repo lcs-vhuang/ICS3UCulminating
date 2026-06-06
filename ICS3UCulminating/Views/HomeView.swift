@@ -50,25 +50,6 @@ struct HomeView: View {
     }
 }
 
-// MARK: - Helper Views
-
-struct LevelButtonLabel: View {
-    let title: String
-    let color: Color
-    
-    var body: some View {
-        Text(title)
-            .font(.title)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(color)
-            .cornerRadius(15)
-            .shadow(radius: 5)
-    }
-}
-
 #Preview {
     HomeView()
         .environment(GameManager())

@@ -27,6 +27,16 @@ struct SudokuView: View {
     var body: some View {
         VStack(spacing: 20) {
             
+            // 0. Timer Display
+            HStack {
+                Image(systemName: "clock")
+                    .foregroundColor(.secondary)
+                Text(viewModel.formattedTime)
+                    .font(.system(.title3, design: .monospaced))
+                    .fontWeight(.bold)
+            }
+            .padding(.top)
+            
             // 1. The Sudoku Grid
             // To show the 3x3 boxes clearly, we use a "Grid of Grids" approach.
             // The outer Grid handles the nine 3x3 boxes.
@@ -134,9 +144,17 @@ struct SudokuView: View {
         }
         .navigationTitle("\(viewModel.difficulty.rawValue) Level")
         .navigationBarTitleDisplayMode(.inline)
+        // Start the timer when the view appears on screen
+        .onAppear {
+            viewModel.startTimer()
+        }
+        // Stop the timer if the user leaves the screen (goes back home)
+        .onDisappear {
+            viewModel.stopTimer()
+        }
         // Show success screen when the player wins and submits
         .fullScreenCover(isPresented: $showingSuccess) {
-            SuccessView(difficulty: viewModel.difficulty.rawValue)
+            SuccessView(difficulty: viewModel.difficulty.rawValue, timeUsed: viewModel.formattedTime)
                 .onDisappear {
                     // When the success view is dismissed, we go back to home
                     dismiss()

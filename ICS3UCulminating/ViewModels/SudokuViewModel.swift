@@ -28,7 +28,18 @@ class SudokuViewModel {
     // Track if the player has tried to submit their result
     var hasSubmitted: Bool = false
     
+    // Timer related properties
+    var secondsElapsed: Int = 0
+    private var timer: Timer?
+    
     // MARK: Computed properties
+    
+    // Formats seconds into MM:SS
+    var formattedTime: String {
+        let minutes = secondsElapsed / 60
+        let seconds = secondsElapsed % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
     
     // Tells the UI whether the puzzle has been successfully completed.
     var gameIsWon: Bool {
@@ -52,6 +63,22 @@ class SudokuViewModel {
     }
     
     // MARK: Functions
+    
+    // Starts the game timer
+    func startTimer() {
+        // If a timer is already running, don't start another one
+        guard timer == nil else { return }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.secondsElapsed += 1
+        }
+    }
+    
+    // Stops the game timer
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
     
     // Called when a user taps on a cell in the grid.
     func selectCell(row: Int, column: Int) {
@@ -93,11 +120,17 @@ class SudokuViewModel {
 
         self.selectedCell = nil
         self.hasSubmitted = false
+        self.secondsElapsed = 0
     }
     
     // Check if the current board is valid and update submission state
     func submitResult() {
         hasSubmitted = true
+        
+        // If the game is won, stop the timer
+        if gameIsWon {
+            stopTimer()
+        }
         
         // If the game is not won, hide the red highlights after 1 second
         if !gameIsWon {
